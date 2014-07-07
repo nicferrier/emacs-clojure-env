@@ -4,7 +4,8 @@
 
 ;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
 ;; Keywords: languages
-;; Package-depends: ((cider "0.6.0")(clojurescript-mode "0.5"))
+;; Package-depends: ((cider "0.6.0")(clojurescript-mode "0.5")(web "0.4.2"))
+;; Version: 0.0.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -39,6 +40,11 @@
 
 (defcustom clojure-env-clojurescript-template "mies"
   "What template should be used for ClojureScript projects."
+  :group 'clojure-env
+  :type 'string)
+
+(defconst clojure-env-om-template "mies-om"
+  "What template should be used for Om projects."
   :group 'clojure-env
   :type 'string)
 
@@ -94,6 +100,7 @@ Once we're done call NEXT if we have it."
         (format "bash %s cljsbuild once"
                 (expand-file-name "lein" clojure-env-bin-dir))))
 
+;;;###autoload
 (defun clojure-env-new-clojurescript (project-name)
   "Make a new ClojureScript project.
 
@@ -113,18 +120,19 @@ leiningen template to use."
        ;; check?
        (clojure-env/clojurescript-compile)))))
 
+;;;###autoload
 (defun clojure-env-new-om (project-name)
   "Make a new ClojureScript/OM project.
 
-Uses `clojure-env-clojurescript-template' as the name of the
-leiningen template to use."
+Uses `clojure-env-om-template' as the name of the leiningen
+template to use."
   (interactive
    (list
     (read-from-minibuffer "New project name: ")))
   (let ((dir (expand-file-name project-name default-directory)))
     (clojure-env/lein-call
      (format "new %s %s"
-             "mies-om"
+             clojure-env-om-template
              project-name)
      (lambda ()
        (find-file dir)
