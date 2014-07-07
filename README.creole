@@ -1,0 +1,30 @@
+often I see complicated Emacs installation procedures for building an
+environment for an external language such as JavaScript or Clojure.
+
+This is an attempt to make an opinionated Clojure specific setup from
+inside Emacs.
+
+=== leiningen ===
+This goes and gets leiningen and installs it, lazily. That is if you
+use any clojure-env command it will check whether it has leiningen and
+go get it for you if it doesn't have it.
+
+Right now I use a simple file existence check for leiningen because I
+don't want an HTTP request happening every time. A more complicated
+caching strategy seems like an obvious optimization.
+
+=== cider ===
+I'm depending on the cider package for most of an Emacs Clojure
+environment. This is a bit out of date on marmalade because of the
+problems with marmalade in the past. It should get updated soon.
+
+=== clojurescript ===
+I'm depending on the clojurescript-mode package for clojurescript
+support.
+
+ClojureScript is actually my main interest in Clojure so I hope to
+provide something more to the Emacs community there.
+
+I suspect Elnode can help a bit in making ClojureScript useful. I am
+already using {{{elnode-make-webserver}}} to serve ClojureScript
+websites.
