@@ -4,7 +4,7 @@
 
 ;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
 ;; Keywords: languages
-;; Package-depends: ((cider "0.6.0")(clojurescript-mode "0.5")(web "0.4.2"))
+;; Package-depends: ((cider "0.6.0")(clojurescript-mode "0.5")(web "0.4.2")(noflet "0.0.8"))
 ;; Version: 0.0.1
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -30,6 +30,7 @@
 ;;; Code:
 
 (require 'web)
+(require 'noflet)
 
 (defconst clojure-env/lein-url "https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein"
   "Where to find the Leiningen script.")
