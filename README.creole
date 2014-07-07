@@ -28,3 +28,32 @@ provide something more to the Emacs community there.
 I suspect Elnode can help a bit in making ClojureScript useful. I am
 already using {{{elnode-make-webserver}}} to serve ClojureScript
 websites.
+
+=== required dependencies ===
+Java. You have to have java installed. I don't bother detecting if you
+have it or not. I probably will add a check at least before we even
+try and download leiningen.
+
+=== customize environment ===
+Most things that could be choices are provided as Emacs customization
+options in the group {{{clojure-env}}} in languages.
+
+=== commands ===
+Here are the two commands this package currenty provides:
+
+==== clojure-env-new-clojurescript project-name ====
+
+Make a new ClojureScript project.
+
+Uses {{{clojure-env-clojurescript-template}}} as the name of the
+leiningen template to use.
+
+
+==== clojure-env-new-om project-name ====
+
+Make a new ClojureScript/OM project.
+
+Uses {{{clojure-env-om-template}}} as the name of the
+leiningen template to use.
+
+
