@@ -87,6 +87,13 @@ Once we're done call NEXT if we have it."
           (action)
           (clojure-env/lein-get 'action)))))
 
+(defun clojure-env/clojurescript-compile ()
+  "Set the `compile-command' for clojurescript."
+  (make-variable-buffer-local 'compile-command)
+  (setq compile-command 
+        (format "bash %s cljsbuild once"
+                (expand-file-name "lein" clojure-env-bin-dir))))
+
 (defun clojure-env-new-clojurescript (project-name)
   "Make a new ClojureScript project.
 
@@ -100,7 +107,30 @@ leiningen template to use."
      (format "new %s %s"
              clojure-env-clojurescript-template
              project-name)
-     (lambda () (find-file dir)))))
+     (lambda ()
+       (find-file dir)
+       ;; How can we call this in a hook with a locate-dominating-file
+       ;; check?
+       (clojure-env/clojurescript-compile)))))
+
+(defun clojure-env-new-om (project-name)
+  "Make a new ClojureScript/OM project.
+
+Uses `clojure-env-clojurescript-template' as the name of the
+leiningen template to use."
+  (interactive
+   (list
+    (read-from-minibuffer "New project name: ")))
+  (let ((dir (expand-file-name project-name default-directory)))
+    (clojure-env/lein-call
+     (format "new %s %s"
+             "mies-om"
+             project-name)
+     (lambda ()
+       (find-file dir)
+       ;; How can we call this in a hook with a locate-dominating-file
+       ;; check?
+       (clojure-env/clojurescript-compile)))))
 
 (provide 'clojure-env)
 
