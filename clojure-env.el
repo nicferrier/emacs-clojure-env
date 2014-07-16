@@ -5,7 +5,7 @@
 ;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
 ;; Keywords: languages
 ;; Package-depends: ((cider "0.6.0")(clojurescript-mode "0.5")(web "0.4.2")(noflet "0.0.8"))
-;; Version: 0.0.2
+;; Version: 0.0.3
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
   :group 'clojure-env
   :type 'string)
 
-(defconst clojure-env-om-template "mies-om"
+(defcustom clojure-env-om-template "mies-om"
   "What template should be used for Om projects."
   :group 'clojure-env
   :type 'string)
