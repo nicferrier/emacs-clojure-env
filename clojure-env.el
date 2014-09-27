@@ -95,11 +95,16 @@ Once we're done call NEXT if we have it."
           (clojure-env/lein-get 'action)))))
 
 (defun clojure-env/clojurescript-compile ()
-  "Set the `compile-command' for clojurescript."
-  (make-variable-buffer-local 'compile-command)
-  (setq compile-command 
-        (format "bash %s cljsbuild once"
-                (expand-file-name "lein" clojure-env-bin-dir))))
+  "Produce the `compile-command' for clojurescript."
+  (format "bash %s cljsbuild once"
+          (expand-file-name "lein" clojure-env-bin-dir)))
+
+(defun clojure-env/make-dir-locals (dir)
+  (with-temp-file (expand-file-name ".dir-locals.el" dir)
+    (let ((command (clojure-env/clojurescript-compile)))
+      (print
+       `((clojure-mode . ((compile-command . ,command))))
+       (current-buffer)))))
 
 ;;;###autoload
 (defun clojure-env-new-clojurescript (project-name)
@@ -117,9 +122,7 @@ leiningen template to use."
              project-name)
      (lambda ()
        (find-file dir)
-       ;; How can we call this in a hook with a locate-dominating-file
-       ;; check?
-       (clojure-env/clojurescript-compile)))))
+       (clojure-env/make-dir-locals dir)))))
 
 ;;;###autoload
 (defun clojure-env-new-om (project-name)
