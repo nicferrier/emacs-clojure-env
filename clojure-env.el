@@ -140,9 +140,7 @@ template to use."
              project-name)
      (lambda ()
        (find-file dir)
-       ;; How can we call this in a hook with a locate-dominating-file
-       ;; check?
-       (clojure-env/clojurescript-compile)))))
+       (clojure-env/make-dir-locals dir)))))
 
 (provide 'clojure-env)
 
