@@ -121,8 +121,8 @@ leiningen template to use."
              clojure-env-clojurescript-template
              project-name)
      (lambda ()
-       (find-file dir)
-       (clojure-env/make-dir-locals dir)))))
+       (clojure-env/make-dir-locals dir)
+       (find-file dir)))))
 
 ;;;###autoload
 (defun clojure-env-new-om (project-name)
@@ -139,8 +139,22 @@ template to use."
              clojure-env-om-template
              project-name)
      (lambda ()
-       (find-file dir)
-       (clojure-env/make-dir-locals dir)))))
+       (clojure-env/make-dir-locals dir)
+       (find-file dir)))))
+
+(defun clojure-env-new-app (project-name)
+  "Make a new Clojure project with the app template."
+  (interactive
+   (list
+    (read-from-minibuffer "New project name: ")))
+  (let ((dir (expand-file-name project-name default-directory)))
+    (clojure-env/lein-call
+     (format "new %s %s"
+             "app"
+             project-name)
+     (lambda ()
+       (clojure-env/make-dir-locals dir)
+       (find-file dir)))))
 
 (provide 'clojure-env)
 
