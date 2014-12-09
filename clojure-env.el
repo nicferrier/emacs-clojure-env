@@ -106,6 +106,13 @@ Once we're done call NEXT if we have it."
        `((clojure-mode . ((compile-command . ,command))))
        (current-buffer)))))
 
+;; Make sure we get the compile key - not sure if it would be better
+;; to add it to the keymap directly
+(add-hook
+ 'clojure-mode-hook
+ (lambda ()
+   (local-set-key (kbd "C-c C-k") 'compile)))
+
 ;;;###autoload
 (defun clojure-env-new-clojurescript (project-name)
   "Make a new ClojureScript project.
