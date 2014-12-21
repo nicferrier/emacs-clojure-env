@@ -5,7 +5,7 @@
 ;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
 ;; Keywords: languages
 ;; Package-depends: ((cider "0.6.0")(clojurescript-mode "0.5")(web "0.4.2")(noflet "0.0.8"))
-;; Version: 0.0.3
+;; Version: 0.0.4
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -156,9 +156,7 @@ template to use."
     (read-from-minibuffer "New project name: ")))
   (let ((dir (expand-file-name project-name default-directory)))
     (clojure-env/lein-call
-     (format "new %s %s"
-             "app"
-             project-name)
+     (format "new %s %s" "app" project-name)
      (lambda ()
        (clojure-env/make-dir-locals dir)
        (find-file dir)))))
